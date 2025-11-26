@@ -1,5 +1,5 @@
 {
-  "name": "@my/design-library",
+  "name": "@my/ui",
   "version": "1.0.0",
   "main": "src/index.tsx",
   "types": "src/index.tsx",
