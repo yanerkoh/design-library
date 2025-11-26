@@ -9,7 +9,6 @@ const COLORS = {
   requiredRed: '#D0021B',
   errorBg: '#FFE5E5',
   errorBorder: '#D0021B',
-  subsectionBg: '#E8EBF0',
 }
 
 type FormGroupProps = {
