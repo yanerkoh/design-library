@@ -11,14 +11,19 @@
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*",
     "tamagui": "*",
     "@tamagui/core": "*",
     "@tamagui/lucide-icons": "*"
   },
+  "peerDependenciesMeta": {
+    "react-native": {
+      "optional": true
+    }
+  },
   "dependencies": {},
   "devDependencies": {
     "@types/react": "^18.2.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "react-native": "*"
   }
 }
