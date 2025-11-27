@@ -1,89 +1,159 @@
-import { styled, Text, GetProps } from '@tamagui/core'
+import { styled, GetProps } from 'tamagui'
 import { Button as TamaguiButton } from '@tamagui/button'
 import { isValidElement } from 'react'
 
-const COLORS = {
-  primary: '#ffc23e',
-  primaryHover: '#ffc23e',
-  primaryActive: '#ffc23e',
-  primaryText: '#0c0d0d',
-  primarySuccess: '#008700',
-  primarySuccessHover: '#007200',
-  primaryError: '#cc3123',
-  primaryErrorHover: '#b02215',
-  primaryWarning: '#c75000',
-  primaryDisabled: '#d3d3d3',
-  secondary: '#fff',
-  secondaryBorder: '#c75000',
-  secondaryText: '#c75000',
-  secondaryDisabled: '#d3d3d3',
-  shadow: '0 6px 10px rgba(0,0,0,.14),0 1px 18px rgba(0,0,0,.12)',
-  disabledShadow: 'none',
-}
-
 export const ButtonDXPlus = styled(TamaguiButton, {
   name: 'ButtonDXPlus',
-  borderRadius: 8,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  outlineOffset: 0,
-  userSelect: 'none',
-  transitionProperty: 'box-shadow, transform',
-  transitionDuration: '.175s',
-  transitionTimingFunction: 'ease',
+  borderRadius: '$3',
+  fontWeight: '600',
+  cursor: 'pointer',
 
   variants: {
     variant: {
       primary: {
-        backgroundColor: COLORS.primary,
+        backgroundColor: '$yellow9',
+        color: '$gray12',
         borderWidth: 1,
-        borderColor: COLORS.primary,
+        borderTopColor: '$yellow9',
+        borderRightColor: '$yellow9',
+        borderBottomColor: '$yellow9',
+        borderLeftColor: '$yellow9',
+
+        hoverStyle: {
+          backgroundColor: '$yellow10',
+          transform: 'translateY(-1px)',
+        },
+
+        pressStyle: {
+          backgroundColor: '$yellow8',
+          transform: 'none',
+        },
       },
+
       secondary: {
-        backgroundColor: COLORS.secondary,
+        backgroundColor: '$background',
+        color: '$orange9',
         borderWidth: 1,
-        borderColor: COLORS.secondaryBorder,
+        borderTopColor: '$orange9',
+        borderRightColor: '$orange9',
+        borderBottomColor: '$orange9',
+        borderLeftColor: '$orange9',
+
+        hoverStyle: {
+          backgroundColor: '$orange2',
+          transform: 'translateY(-1px)',
+        },
+
+        pressStyle: {
+          backgroundColor: '$orange3',
+          transform: 'none',
+        },
       },
     },
+
     size: {
-      s: { paddingVertical: 4, paddingHorizontal: 5 },
-      m: { paddingVertical: 8, paddingHorizontal: 16 },
-      l: { paddingVertical: 12, paddingHorizontal: 20 },
+      s: {
+        paddingVertical: '$2',
+        paddingHorizontal: '$3',
+        fontSize: '$3',
+      },
+      m: {
+        paddingVertical: '$3',
+        paddingHorizontal: '$4',
+        fontSize: '$4',
+      },
+      l: {
+        paddingVertical: '$4',
+        paddingHorizontal: '$5',
+        fontSize: '$5',
+      },
     },
+
     disabled: {
       true: {
         cursor: 'not-allowed',
-        boxShadow: COLORS.disabledShadow,
-        backgroundColor: COLORS.primaryDisabled,
-        color: '#fff',
-        borderColor: COLORS.primaryDisabled,
+        opacity: 0.5,
+        backgroundColor: '$gray5',
+        color: '$gray10',
+        borderTopColor: '$gray5',
+        borderRightColor: '$gray5',
+        borderBottomColor: '$gray5',
+        borderLeftColor: '$gray5',
+
+        hoverStyle: {
+          transform: 'none',
+          backgroundColor: '$gray5',
+        },
+
+        pressStyle: {
+          transform: 'none',
+          backgroundColor: '$gray5',
+        },
       },
     },
+
     status: {
       default: {},
-      success: {},
-      error: {},
-      warning: {},
+
+      success: {
+        backgroundColor: '$green9',
+        color: 'white',
+        borderTopColor: '$green9',
+        borderRightColor: '$green9',
+        borderBottomColor: '$green9',
+        borderLeftColor: '$green9',
+
+        hoverStyle: {
+          backgroundColor: '$green10',
+        },
+
+        pressStyle: {
+          backgroundColor: '$green8',
+        },
+      },
+
+      error: {
+        backgroundColor: '$red9',
+        color: 'white',
+        borderTopColor: '$red9',
+        borderRightColor: '$red9',
+        borderBottomColor: '$red9',
+        borderLeftColor: '$red9',
+
+        hoverStyle: {
+          backgroundColor: '$red10',
+        },
+
+        pressStyle: {
+          backgroundColor: '$red8',
+        },
+      },
+
+      warning: {
+        backgroundColor: '$orange9',
+        color: 'white',
+        borderTopColor: '$orange9',
+        borderRightColor: '$orange9',
+        borderBottomColor: '$orange9',
+        borderLeftColor: '$orange9',
+
+        hoverStyle: {
+          backgroundColor: '$orange10',
+        },
+
+        pressStyle: {
+          backgroundColor: '$orange8',
+        },
+      },
     },
+
     iconOnly: {
       true: {
-        padding: 8,
-        width: 44,
-        height: 44,
+        padding: '$3',
         aspectRatio: 1,
       },
     },
-  },
-
-  hoverStyle: {
-    transform: 'translateY(-0.0625rem)',
-    boxShadow: COLORS.shadow,
-  },
-  pressStyle: {
-    transform: 'none',
-    boxShadow: 'none',
-  },
+  } as const,
 })
 
 type BaseButtonProps = GetProps<typeof ButtonDXPlus>
@@ -92,6 +162,8 @@ export type ButtonProps = Omit<BaseButtonProps, 'variant' | 'size' | 'status' | 
   variant?: 'primary' | 'secondary'
   size?: 's' | 'm' | 'l'
   status?: 'default' | 'success' | 'error' | 'warning'
+  icon?: React.ReactNode
+  onPress?: () => void
 }
 
 export function Button({
@@ -101,68 +173,24 @@ export function Button({
   status = 'default',
   disabled = false,
   icon,
+  onPress,
   ...props
 }: ButtonProps) {
-  let bgColor = COLORS.primary
-  let textColor = COLORS.primaryText
-  let borderColor = COLORS.primary
-
-  // Check if button only contains an icon (no text children)
   const isIconOnly =
     (icon && !children) || (isValidElement(children) && typeof children.type !== 'string')
 
-  if (variant === 'primary') {
-    if (status === 'success') {
-      bgColor = COLORS.primarySuccess
-      textColor = '#fff'
-      borderColor = COLORS.primarySuccess
-    } else if (status === 'error') {
-      bgColor = COLORS.primaryError
-      textColor = '#fff'
-      borderColor = COLORS.primaryError
-    } else if (status === 'warning') {
-      bgColor = COLORS.primaryWarning
-      textColor = '#fff'
-      borderColor = COLORS.primaryWarning
-    }
-  }
-
-  if (variant === 'secondary') {
-    bgColor = COLORS.secondary
-    textColor = COLORS.secondaryText
-    borderColor = COLORS.secondaryBorder
-
-    if (status === 'success') borderColor = COLORS.primarySuccess
-    if (status === 'error') borderColor = COLORS.primaryError
-    if (status === 'warning') borderColor = COLORS.primaryWarning
-  }
-
-  if (disabled) {
-    bgColor = COLORS.primaryDisabled
-    textColor = '#fff'
-    borderColor = COLORS.primaryDisabled
-  }
-
-  // Map size to fontSize and iconSize
-  const fontSize = size === 's' ? 14 : size === 'm' ? 16 : 18
-  const iconSize = size === 's' ? 20 : size === 'm' ? 24 : 28
-
   return (
     <ButtonDXPlus
-      variant={variant as any}
-      size={size as any}
-      disabled={disabled as any}
-      iconOnly={isIconOnly as any}
+      variant={variant}
+      size={size}
+      status={status}
+      disabled={disabled}
+      iconOnly={isIconOnly}
       icon={icon}
-      scaleIcon={iconSize / 16}
-      style={{ backgroundColor: bgColor, borderColor }}
-      {...(props as any)}
+      onPress={onPress}
+      {...props}
     >
-      {children && !isIconOnly && (
-        <Text fontWeight={600} fontSize={fontSize} color={textColor} alignSelf="center">
-          {children}
-        </Text>
-      )}
+      {children}
     </ButtonDXPlus>
   )
 }
