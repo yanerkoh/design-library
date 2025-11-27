@@ -84,7 +84,7 @@ export const ButtonDXPlus = styled(TamaguiButton, {
     transform: 'none',
     boxShadow: 'none',
   },
-} as any)
+})
 
 type BaseButtonProps = GetProps<typeof ButtonDXPlus>
 
