@@ -4,67 +4,99 @@ import { isValidElement } from 'react'
 
 export const ButtonDXPlus = styled(TamaguiButton, {
   name: 'ButtonDXPlus',
-  borderRadius: '$3',
+  borderRadius: 8,
   fontWeight: '600',
   cursor: 'pointer',
+  outlineOffset: 0,
+  userSelect: 'none',
+
+  hoverStyle: {
+    transform: 'translateY(-1px)',
+    shadowColor: 'rgba(0,0,0,0.14)',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 1,
+    shadowRadius: 10,
+  },
+
+  pressStyle: {
+    transform: 'none',
+    shadowColor: 'transparent',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0,
+    shadowRadius: 0,
+  },
 
   variants: {
     variant: {
       primary: {
-        backgroundColor: '$yellow9',
-        color: '$gray12',
+        backgroundColor: '#ffc23e',
+        color: '#0c0d0d',
         borderWidth: 1,
-        borderTopColor: '$yellow9',
-        borderRightColor: '$yellow9',
-        borderBottomColor: '$yellow9',
-        borderLeftColor: '$yellow9',
+        borderTopColor: '#ffc23e',
+        borderRightColor: '#ffc23e',
+        borderBottomColor: '#ffc23e',
+        borderLeftColor: '#ffc23e',
 
         hoverStyle: {
-          backgroundColor: '$yellow10',
-          transform: 'translateY(-1px)',
+          backgroundColor: '#ffc23e',
+          borderTopColor: '#ffc23e',
+          borderRightColor: '#ffc23e',
+          borderBottomColor: '#ffc23e',
+          borderLeftColor: '#ffc23e',
         },
 
         pressStyle: {
-          backgroundColor: '$yellow8',
-          transform: 'none',
+          backgroundColor: '#ffc23e',
+          borderTopColor: '#ffc23e',
+          borderRightColor: '#ffc23e',
+          borderBottomColor: '#ffc23e',
+          borderLeftColor: '#ffc23e',
         },
       },
 
       secondary: {
-        backgroundColor: '$background',
-        color: '$orange9',
+        backgroundColor: '#ffffff',
+        color: '#c75000',
         borderWidth: 1,
-        borderTopColor: '$orange9',
-        borderRightColor: '$orange9',
-        borderBottomColor: '$orange9',
-        borderLeftColor: '$orange9',
+        borderTopColor: '#c75000',
+        borderRightColor: '#c75000',
+        borderBottomColor: '#c75000',
+        borderLeftColor: '#c75000',
 
         hoverStyle: {
-          backgroundColor: '$orange2',
-          transform: 'translateY(-1px)',
+          backgroundColor: '#ffffff',
+          color: '#c75000',
+          borderTopColor: '#c75000',
+          borderRightColor: '#c75000',
+          borderBottomColor: '#c75000',
+          borderLeftColor: '#c75000',
         },
 
         pressStyle: {
-          backgroundColor: '$orange3',
-          transform: 'none',
+          backgroundColor: '#ffffff',
+          color: '#c75000',
+          borderTopColor: '#c75000',
+          borderRightColor: '#c75000',
+          borderBottomColor: '#c75000',
+          borderLeftColor: '#c75000',
         },
       },
     },
 
     size: {
       s: {
-        paddingVertical: '$2',
-        paddingHorizontal: '$3',
+        paddingVertical: 3, // 0.1875rem = 3px
+        paddingHorizontal: 7, // 0.4375rem = 7px
         fontSize: '$3',
       },
       m: {
-        paddingVertical: '$3',
-        paddingHorizontal: '$4',
+        paddingVertical: 7, // 0.4375rem = 7px
+        paddingHorizontal: 23, // 1.4375rem = 23px
         fontSize: '$4',
       },
       l: {
-        paddingVertical: '$4',
-        paddingHorizontal: '$5',
+        paddingVertical: 10, // 0.625rem = 10px
+        paddingHorizontal: 23, // 1.4375rem = 23px
         fontSize: '$5',
       },
     },
@@ -72,22 +104,13 @@ export const ButtonDXPlus = styled(TamaguiButton, {
     disabled: {
       true: {
         cursor: 'not-allowed',
-        opacity: 0.5,
-        backgroundColor: '$gray5',
-        color: '$gray10',
-        borderTopColor: '$gray5',
-        borderRightColor: '$gray5',
-        borderBottomColor: '$gray5',
-        borderLeftColor: '$gray5',
+        shadowColor: 'transparent',
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 0,
 
         hoverStyle: {
           transform: 'none',
-          backgroundColor: '$gray5',
-        },
-
-        pressStyle: {
-          transform: 'none',
-          backgroundColor: '$gray5',
+          shadowColor: 'transparent',
         },
       },
     },
@@ -96,64 +119,133 @@ export const ButtonDXPlus = styled(TamaguiButton, {
       default: {},
 
       success: {
-        backgroundColor: '$green9',
-        color: 'white',
-        borderTopColor: '$green9',
-        borderRightColor: '$green9',
-        borderBottomColor: '$green9',
-        borderLeftColor: '$green9',
+        backgroundColor: '#008700',
+        color: '#ffffff',
+        borderTopColor: '#008700',
+        borderRightColor: '#008700',
+        borderBottomColor: '#008700',
+        borderLeftColor: '#008700',
 
         hoverStyle: {
-          backgroundColor: '$green10',
+          backgroundColor: '#007200',
+          borderTopColor: '#007200',
+          borderRightColor: '#007200',
+          borderBottomColor: '#007200',
+          borderLeftColor: '#007200',
         },
 
         pressStyle: {
-          backgroundColor: '$green8',
+          backgroundColor: '#007200',
+          borderTopColor: '#007200',
+          borderRightColor: '#007200',
+          borderBottomColor: '#007200',
+          borderLeftColor: '#007200',
         },
       },
 
       error: {
-        backgroundColor: '$red9',
-        color: 'white',
-        borderTopColor: '$red9',
-        borderRightColor: '$red9',
-        borderBottomColor: '$red9',
-        borderLeftColor: '$red9',
+        backgroundColor: '#cc3123',
+        color: '#ffffff',
+        borderTopColor: '#cc3123',
+        borderRightColor: '#cc3123',
+        borderBottomColor: '#cc3123',
+        borderLeftColor: '#cc3123',
 
         hoverStyle: {
-          backgroundColor: '$red10',
+          backgroundColor: '#b02215',
+          borderTopColor: '#b02215',
+          borderRightColor: '#b02215',
+          borderBottomColor: '#b02215',
+          borderLeftColor: '#b02215',
         },
 
         pressStyle: {
-          backgroundColor: '$red8',
+          backgroundColor: '#b02215',
+          borderTopColor: '#b02215',
+          borderRightColor: '#b02215',
+          borderBottomColor: '#b02215',
+          borderLeftColor: '#b02215',
         },
       },
 
       warning: {
-        backgroundColor: '$orange9',
-        color: 'white',
-        borderTopColor: '$orange9',
-        borderRightColor: '$orange9',
-        borderBottomColor: '$orange9',
-        borderLeftColor: '$orange9',
+        backgroundColor: '#c75000',
+        color: '#ffffff',
+        borderTopColor: '#c75000',
+        borderRightColor: '#c75000',
+        borderBottomColor: '#c75000',
+        borderLeftColor: '#c75000',
 
         hoverStyle: {
-          backgroundColor: '$orange10',
+          backgroundColor: '#c75000',
+          borderTopColor: '#c75000',
+          borderRightColor: '#c75000',
+          borderBottomColor: '#c75000',
+          borderLeftColor: '#c75000',
         },
 
         pressStyle: {
-          backgroundColor: '$orange8',
+          backgroundColor: '#c75000',
+          borderTopColor: '#c75000',
+          borderRightColor: '#c75000',
+          borderBottomColor: '#c75000',
+          borderLeftColor: '#c75000',
         },
       },
     },
 
     iconOnly: {
-      true: {
-        padding: '$3',
-        aspectRatio: 1,
-      },
+      true: {},
     },
   } as const,
+
+  compoundVariants: [
+    {
+      variant: 'primary',
+      disabled: true,
+      style: {
+        backgroundColor: '#d3d3d3',
+        color: '#ffffff',
+        borderTopColor: '#d3d3d3',
+        borderRightColor: '#d3d3d3',
+        borderBottomColor: '#d3d3d3',
+        borderLeftColor: '#d3d3d3',
+      },
+    },
+    {
+      variant: 'secondary',
+      disabled: true,
+      style: {
+        backgroundColor: '#ffffff',
+        color: '#d3d3d3',
+        borderTopColor: '#d3d3d3',
+        borderRightColor: '#d3d3d3',
+        borderBottomColor: '#d3d3d3',
+        borderLeftColor: '#d3d3d3',
+      },
+    },
+    {
+      size: 'l',
+      iconOnly: true,
+      style: {
+        padding: 16, // 1rem
+      },
+    },
+    {
+      size: 'm',
+      iconOnly: true,
+      style: {
+        padding: 7, // 0.4375rem
+      },
+    },
+    {
+      size: 's',
+      iconOnly: true,
+      style: {
+        padding: 3, // 0.1875rem
+      },
+    },
+  ],
 })
 
 type BaseButtonProps = GetProps<typeof ButtonDXPlus>
